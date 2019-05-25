@@ -40,7 +40,10 @@ class App extends Component {
 
         ) :
           (
+              <>
             <Login />
+              <ProductWrapper/>
+                </>
           )}
       </div>
     );
