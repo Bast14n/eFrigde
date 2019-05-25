@@ -1,0 +1,17 @@
+.productItem__name{
+    float: left;
+    width: 40%;
+}
+
+.productItem__quantity{
+    float: left;
+    width: 30%;
+}
+
+.productItem__wrapper{
+    list-style: none;
+}
+
+.productItem__button{
+    float: left;
+}

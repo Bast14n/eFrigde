@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
 import './App.css';
+
 import fire from './config/Fire';
 import Home from './Home';
 import Login from './Login';
+import ProductWrapper from "./components/ProductWrapper/ProductWrapper.js";
 
 class App extends Component {
   constructor() {
@@ -35,9 +37,13 @@ class App extends Component {
       <div className="App">
         {this.state.user ? (
           <Home />
+
         ) :
           (
+              <>
             <Login />
+              <ProductWrapper/>
+                </>
           )}
       </div>
     );
