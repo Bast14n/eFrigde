@@ -16,7 +16,6 @@ class Home extends Component {
         return (
             <div>
                 <h1>HOME SCREEN</h1>
-                <button onClick={this.logout}>Logout</button>
             </div>
         );
 
