@@ -1,0 +1,11 @@
+.App-navibar {
+  min-height: 100vh;
+  margin: 10px;
+  align-content: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+.App-button{
+  margin: 1px;
+}
