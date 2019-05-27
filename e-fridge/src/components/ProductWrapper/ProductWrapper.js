@@ -16,7 +16,7 @@ class ProductWrapper extends React.Component {
     }
 
     getDataFromDatabase()  {
-        console.log(this.state.userId);
+        if (this.state.userId===null) window.location.reload();
         this.database.on('value', (snapshot) => {
             let products = snapshot.val();
             let downloadedFridge = [];
@@ -61,16 +61,18 @@ class ProductWrapper extends React.Component {
                         const indexInState = this.state.products.findIndex(item => item.name.toLowerCase() === name.toLowerCase());
                         const id = this.state.products[indexInState].id;
                         const type = this.state.products[indexInState].type;
-                        if (/^\d+$/.test(quantity) === false) {
+                        if (/^\d+$/.test(quantity) === false || quantity==0) {
                             alert('wybierz ilość');
                             return;
                         }
                         const indexOfProduct = this.state.fridge.findIndex(item => item.name.toLowerCase() === name.toLowerCase());
                         if (indexOfProduct === -1) {
-                            this.setState({
-                                fridge: [...this.state.fridge, {id: id,name: name, quantity: Number.parseInt(quantity), type: type}]
-                            });
-                           this.database.set(this.state.fridge)
+                            this.state.fridge.push({id: id, name: name, quantity: Number.parseInt(quantity), type:type});
+                            this.forceUpdate();
+                            // this.setState({
+                            //     fridge: [...this.state.fridge, {id: id,name: name, quantity: Number.parseInt(quantity), type: type}]
+                            // });
+                           this.database.update(this.state.fridge)
                         }
                         else {
                             this.state.fridge[indexOfProduct].quantity += Number.parseInt(quantity);
