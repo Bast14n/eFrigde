@@ -1,12 +1,43 @@
 import React from 'react';
 import ProductItem from './ProductItem/ProductItem';
 import Products from './products'
+import fire from '../../config/Fire';
 
 class ProductWrapper extends React.Component {
     state = {
+        userId: localStorage.getItem('user'),
         fridge: [],
         products: Products,
     };
+
+    constructor(){
+        super();
+        this.database = fire.database().ref(`fridge/userId/${this.state.userId}`);
+    }
+
+    getDataFromDatabase()  {
+        if (this.state.userId===null) window.location.reload();
+        this.database.on('value', (snapshot) => {
+            let products = snapshot.val();
+            let downloadedFridge = [];
+            if  (products === null) return;
+            products.forEach(product => {
+                downloadedFridge.push({
+                    id: product.id,
+                    name: product.name,
+                    quantity: product.quantity,
+                    type: product.type,
+                })
+            });
+            this.setState({
+                fridge: downloadedFridge
+        });
+        })
+    }
+
+    componentWillMount() {
+        this.getDataFromDatabase();
+    }
 
     render() {
         return (<>
@@ -30,19 +61,23 @@ class ProductWrapper extends React.Component {
                         const indexInState = this.state.products.findIndex(item => item.name.toLowerCase() === name.toLowerCase());
                         const id = this.state.products[indexInState].id;
                         const type = this.state.products[indexInState].type;
-                        if (/^\d+$/.test(quantity) === false) {
+                        if (/^\d+$/.test(quantity) === false || quantity==0) {
                             alert('wybierz ilość');
                             return;
                         }
                         const indexOfProduct = this.state.fridge.findIndex(item => item.name.toLowerCase() === name.toLowerCase());
                         if (indexOfProduct === -1) {
-                            this.setState({
-                                fridge: [...this.state.fridge, {id: id,name: name, quantity: Number.parseInt(quantity), type: type}]
-                            });
+                            this.state.fridge.push({id: id, name: name, quantity: Number.parseInt(quantity), type:type});
+                            this.forceUpdate();
+                            // this.setState({
+                            //     fridge: [...this.state.fridge, {id: id,name: name, quantity: Number.parseInt(quantity), type: type}]
+                            // });
+                           this.database.update(this.state.fridge)
                         }
                         else {
                             this.state.fridge[indexOfProduct].quantity += Number.parseInt(quantity);
-                            this.forceUpdate()
+                            this.forceUpdate();
+                            this.database.update(this.state.fridge);
                         }
                         document.getElementById('quantity').value = "";
                     }
