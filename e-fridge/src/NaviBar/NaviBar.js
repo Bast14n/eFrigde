@@ -1,14 +1,15 @@
 import React from 'react';
 import './NaviBar.css';
 import Button from "reactstrap/es/Button";
+import {Link} from "react-router-dom";
 
 export const NaviBar = () => (
     <div className="App-navibar">
-        <Button className="App-button">Button 1</Button>
-        <Button className="App-button">Button 2</Button>
-        <Button className="App-button">Button 3</Button>
-        <Button className="App-button">Button 4</Button>
-        <Button className="App-button">Button 5</Button>
+            <Button className="App-button">
+                    <Link to="/navibar">
+                            Button 1
+                    </Link>
+            </Button>
     </div>
 );
 
