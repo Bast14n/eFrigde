@@ -34,6 +34,43 @@ const products = [
         id: 7,
         name: "Papryka",
         type: "sztuka"
-    },];
+    },
+    {
+        id: 8,
+        name: "Ogórek",
+        type: "sztuka"
+    },
+    {
+        id: 9,
+        name: "Jajko",
+        type: "sztuka"
+    },
+    {
+        id: 10,
+        name: "Mleko",
+        type: "mililitr"
+    },
+    {
+        id: 11,
+        name: "Masło",
+        type: "gram"
+    },
+    {
+        id: 12,
+        name: "Filet",
+        type: "sztuka"
+    },
+    {
+        id: 13,
+        name: "Sos",
+        type: "sztuka"
+    },
+    {
+        id: 14,
+        name: "Makaron",
+        type: "gram"
+    },
+
+];
 
 export default products;

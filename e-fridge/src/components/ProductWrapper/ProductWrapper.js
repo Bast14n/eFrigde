@@ -1,12 +1,43 @@
 import React from 'react';
 import ProductItem from './ProductItem/ProductItem';
 import Products from './products'
+import fire from '../../config/Fire';
 
 class ProductWrapper extends React.Component {
     state = {
+        userId: localStorage.getItem('user'),
         fridge: [],
         products: Products,
     };
+
+    constructor(){
+        super();
+        this.database = fire.database().ref(`fridge/userId/${this.state.userId}`);
+    }
+
+    getDataFromDatabase()  {
+        console.log(this.state.userId);
+        this.database.on('value', (snapshot) => {
+            let products = snapshot.val();
+            let downloadedFridge = [];
+            if  (products === null) return;
+            products.forEach(product => {
+                downloadedFridge.push({
+                    id: product.id,
+                    name: product.name,
+                    quantity: product.quantity,
+                    type: product.type,
+                })
+            });
+            this.setState({
+                fridge: downloadedFridge
+        });
+        })
+    }
+
+    componentWillMount() {
+        this.getDataFromDatabase();
+    }
 
     render() {
         return (<>
@@ -39,10 +70,12 @@ class ProductWrapper extends React.Component {
                             this.setState({
                                 fridge: [...this.state.fridge, {id: id,name: name, quantity: Number.parseInt(quantity), type: type}]
                             });
+                           this.database.set(this.state.fridge)
                         }
                         else {
                             this.state.fridge[indexOfProduct].quantity += Number.parseInt(quantity);
-                            this.forceUpdate()
+                            this.forceUpdate();
+                            this.database.update(this.state.fridge);
                         }
                         document.getElementById('quantity').value = "";
                     }
