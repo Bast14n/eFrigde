@@ -1,0 +1,11 @@
+body{
+    background-color: #61dafb;
+}
+.MainContainer{
+    text-align: center;
+    margin-top: 1%;
+}
+.logoImage{
+    align-self: center;
+    width: 300px;
+}
