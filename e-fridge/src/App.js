@@ -65,7 +65,6 @@ class App extends Component {
             uiConfig={this.uiConfig}
             firebaseAuth={firebase.auth()}
             />
-            <button onClick={this.Login}>Register</button>
           </div>
         )}
       </div>
