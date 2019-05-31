@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import fire from './config/Fire';
+import firebase from "./App";
+import ProductWrapper from "./components/ProductWrapper/ProductWrapper";
 
 class Home extends Component {
     constructor(props) {
@@ -15,7 +17,7 @@ class Home extends Component {
     render() {
         return (
             <div>
-                <h1>HOME SCREEN</h1>
+                <ProductWrapper/>
             </div>
         );
 
