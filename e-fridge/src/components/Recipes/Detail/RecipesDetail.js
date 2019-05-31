@@ -1,6 +1,7 @@
 import React from 'react';
 import axios from 'axios';
 import Ingredients from './Ingredients';
+import './RecipesDetail.css' ;
 
 class RecipesDetail extends React.Component{
     constructor(props) {

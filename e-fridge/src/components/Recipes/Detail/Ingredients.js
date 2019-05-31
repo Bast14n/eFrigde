@@ -1,4 +1,5 @@
 import React from 'react';
+import './Ingredients.css';
 
 const Ingredients = (props) => (
     <li>
