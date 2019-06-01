@@ -1,6 +1,5 @@
 import React from 'react';
 import './AddProduct.css';
-import firebase from "./App";
 import fire from './config/Fire';
 import Products from "./components/ProductWrapper/products";
 
@@ -42,10 +41,11 @@ class AddProduct extends React.Component {
 
     render() {
         return (
-            <div className="">
-                <div className="row">
-                    <form>
-                        <div className="col-form-label">
+            <div className="container">
+
+                <form>
+                    <div className="row">
+                        <div className="col-lg-6">
                             <select type="text" id="name" className="form-control">
                                 <option disabled selected>Wybierz produkt</option>
                                 {
@@ -56,11 +56,11 @@ class AddProduct extends React.Component {
                                 }
                             </select>
                         </div>
-                        <div className="col-form-label">
+                        <div className="col-lg-2">
                             <input id="quantity" placeholder="ilość" className="form-control"/>
                         </div>
-                        <div className="col-form-label">
-                            <button className="btn btn-primary" onClick={event => {
+                        <div className="col-sm-2">
+                            <button type="button" className="btn btn-outline-success" onClick={event => {
                                 event.preventDefault();
                                 const name = document.getElementById("name").value;
                                 const quantity = document.getElementById('quantity').value;
@@ -83,6 +83,7 @@ class AddProduct extends React.Component {
                                     this.forceUpdate();
                                     this.database.update(this.state.fridge)
                                 } else {
+                                    // eslint-disable-next-line
                                     this.state.fridge[indexOfProduct].quantity += Number.parseInt(quantity);
                                     this.forceUpdate();
                                     this.database.update(this.state.fridge);
@@ -93,8 +94,9 @@ class AddProduct extends React.Component {
                             >Dodaj produkt
                             </button>
                         </div>
-                    </form>
-                </div>
+                    </div>
+                </form>
+
             </div>
         )
 

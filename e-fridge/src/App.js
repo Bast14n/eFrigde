@@ -1,8 +1,6 @@
 import React, {Component} from 'react';
 import './App.css';
-import Product from './components/ProductWrapper/ProductItem/ProductItem.js';
 import {BrowserRouter, Route, Switch, Link} from 'react-router-dom'
-
 
 
 // import fire from './config/Fire';
@@ -37,7 +35,6 @@ class App extends Component {
         callbacks: {
             signInSuccess: () => false
         }
-
     }
 
     componentDidMount = () => {
@@ -50,44 +47,67 @@ class App extends Component {
 
     render() {
         return (
-            <div className="App">
-                {this.state.isSignedIn ? (
-                    <BrowserRouter>
-                        <Switch>
+            <div className="area App">
+                    <ul className="circles">
+                        <li></li>
+                        <li></li>
+                        <li></li>
+                        <li></li>
+                        <li></li>
+                        <li></li>
+                        <li></li>
+                        <li></li>
+                        <li></li>
+                        <li></li>
+                    </ul>
+                    {this.state.isSignedIn ? (
+                        <BrowserRouter>
+                            <Switch>
                             <span>
+                                <div className="btn-group" role="group" aria-label="Basic example">
 
-                                <div>
-                                <Link to="/profile"><button className="btn btn-danger">Twój profil</button></Link>
-                                <Link to="/your-fridge"><button
-                                    className="btn btn-danger">Podgląd Twojej lodówki</button></Link>
-                                <Link to="/add-product"><button
-                                    className="btn btn-danger">Dodaj produkt do lodówki</button></Link>
-                                <Link to="/search"><button
-                                    className="btn btn-danger">Wyszukaj dostępny przepis</button></Link>
-                                <button className="btn btn-warning" onClick={() => {
-                                    firebase.auth().signOut();
-                                    localStorage.removeItem('user');
-                                }}>Wyloguj!</button>
-                            </div>
+                                    <button type="button" className="btn btn-outline-info">
+                                        <Link style={{textDecoration: 'none', color: 'white'}}
+                                              to="/profile">Twój profil</Link>
+                                    </button>
+                                    <button type="button" className="btn btn-outline-info">
+                                        <Link style={{textDecoration: 'none', color: 'white'}} to="/your-fridge">
+                                            Podgląd Twojej lodówki</Link>
+                                        </button>
+                                        <button type="button" className="btn btn-outline-info">
+                                    <Link style={{textDecoration: 'none', color: 'white'}} to="/add-product">Dodaj produkt do lodówki</Link>
+                                        </button>
+                                        <button type="button" className="btn btn-outline-info">
+                                    <Link style={{textDecoration: 'none', color: 'white'}} to="/search">Wyszukaj dostępny przepis</Link>
+                                        </button>
+                                    <button type="button" className="btn btn-outline-warning" onClick={() => {
+                                        firebase.auth().signOut();
+                                        localStorage.removeItem('user');
+                                    }}>
+                                        Wyloguj!
+                                    </button>
+                                </div>
+
+                                <div className="btn-group" role="group" aria-label="Basic example">
+
+                                </div>
                             <h1>Witaj {firebase.auth().currentUser.displayName}</h1>
-
                                 <Route exact path="/profile" component={Home}/>
                                 <Route path="/your-fridge" component={Home}/>
                                 <Route path="/add-product" component={Add}/>
                             </span>
-                        </Switch>
-                    </BrowserRouter>
-
-                ) : (
-                    <div>
-                        <StyledFirebaseAuth
-                            uiConfig={this.uiConfig}
-                            firebaseAuth={firebase.auth()}
-                        />
-                        {/*<button onClick={this.Login}>Register</button>*/}
-                    </div>
-                )}
-            </div>
+                            </Switch>
+                        </BrowserRouter>
+                    ) : (
+                        <div>
+                            <StyledFirebaseAuth
+                                uiConfig={this.uiConfig}
+                                firebaseAuth={firebase.auth()}
+                            />
+                            {/*<button onClick={this.Login}>Register</button>*/}
+                        </div>
+                    )}
+                </div>
         )
     }
 }
