@@ -5,11 +5,13 @@ import {BrowserRouter, Route, Switch, Link} from 'react-router-dom'
 
 // import fire from './config/Fire';
 import Home from './Home';
+import LOGO from './logo.png';
 // import Login from './Login';
 import firebase from "firebase";
 import StyledFirebaseAuth from "react-firebaseui/StyledFirebaseAuth"
 import Add from "./AddProduct";
-import Search from "./components/Recipes/Recipes";
+import Recipes from "./components/Recipes/Recipes";
+import RecipesDetail from "./components/Recipes/Detail/RecipesDetail";
 
 if (!firebase.apps.length) {
     firebase.initializeApp({
@@ -62,19 +64,14 @@ class App extends Component {
                         <li/>
                     </ul>
                 </div>
-            <div className="context">
+                <div className="context align-content-center">
                     {this.state.isSignedIn ? (
                         <BrowserRouter>
                             <Switch>
                             <span>
                                 <div className="btn-group" role="group" aria-label="Basic example">
-
                                     <button type="button" className="btn btn-outline-info">
-                                        <Link style={{textDecoration: 'none', color: 'white'}}
-                                              to="/profile">Twój profil</Link>
-                                    </button>
-                                    <button type="button" className="btn btn-outline-info">
-                                        <Link style={{textDecoration: 'none', color: 'white'}} to="/your-fridge">
+                                        <Link style={{textDecoration: 'none', color: 'white'}} to="/">
                                             Podgląd Twojej lodówki</Link>
                                         </button>
                                         <button type="button" className="btn btn-outline-info">
@@ -94,25 +91,33 @@ class App extends Component {
                                 <div className="btn-group" role="group" aria-label="Basic example">
 
                                 </div>
-                            <h1>Witaj {firebase.auth().currentUser.displayName}!</h1>
-                                <Route exact path="/profile" component={Home}/>
-                                <Route exact path="/your-fridge" component={Home}/>
-                                <Route exact path="/add-product" component={Add}/>
-                                <Route path="/RecipeDetails" component={Search}/>
-
+                                {/*<h1>Witaj {firebase.auth().currentUser.displayName}!</h1>*/}
+                                <div className="component">
+                                    <Route exact path="/" component={Home}/>
+                                    <Route exact path="/add-product" component={Add}/>
+                                    <Route exact path="/RecipeDetails" component={Recipes}/>
+                                    <Route exact path="/RecipeDetails/:id" component={RecipesDetail}/>
+                                </div>
                             </span>
                             </Switch>
                         </BrowserRouter>
                     ) : (
-                        <div>
-                            <StyledFirebaseAuth
-                                uiConfig={this.uiConfig}
-                                firebaseAuth={firebase.auth()}
-                            />
+
+                        <div className="context">
+                            <h1 className="component">Witaj w eFrige!</h1>
+                            <h3 className="text-light">eFrigde to aplikacja, która pozwoli Ci znaleźć przepis
+                                wykorzystując składniki które wprowadzisz!</h3>
+                            <img src={LOGO} alt="error" width="200px"/>
+                            <div className="component">
+                                <StyledFirebaseAuth
+                                    uiConfig={this.uiConfig}
+                                    firebaseAuth={firebase.auth()}
+                                />
+                            </div>
                             {/*<button onClick={this.Login}>Register</button>*/}
                         </div>
                     )}
-            </div>
+                </div>
             </div>
         )
     }
