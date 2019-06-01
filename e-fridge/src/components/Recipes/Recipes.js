@@ -1,5 +1,7 @@
 import React from "react";
-import axios from 'axios'
+import axios from 'axios';
+import {Link, BrowserRouter, Route} from 'react-router-dom';
+import RecipesDetail from './Detail/RecipesDetail';
 
 class Recipes extends React.Component {
     constructor(props) {
@@ -48,28 +50,31 @@ class Recipes extends React.Component {
             <tr key={key}>
                 <td>{recipe.name}</td>
                 <td>
-                    <button className="btn btn-primary"
-                            onClick={() => Recipes.showRecipeDetails(recipe.id)}>{labels.detailsButton}</button>
+                    <Link to={`/RecipeDetails/${recipe.id}`} id={recipe.id}>
+                        <button>{labels.detailsButton}</button>
+                    </Link>
+                    <Route path={`/RecipeDetails/:id`}
+                           render={(props) => (<RecipesDetail {...props} id={recipe.id}/>)}/>
                 </td>
             </tr>
         );
 
         return (
-            <div className="container">
-                <div className="row">
-                    <input value={this.state.nameSearchParam} onChange={this.handleChangeSearchParam}/>
-                    <button className='btn btn-primary'
-                            onClick={this.handleClick}>{labels.searchRestaurantsButton}</button>
+            <BrowserRouter>
+                <div className="container">
+                    <div className="row">
+                        <input value={this.state.nameSearchParam} onChange={this.handleChangeSearchParam}/>
+                        <button>{labels.searchRestaurantsButton}</button>
+                    </div>
+                    <div className="row">
+                        <table className="table">
+                            <tbody>
+                            {recipesTableRows}
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
-
-                <div className="row">
-                    <table className="table">
-                        <tbody>
-                        {recipesTableRows}
-                        </tbody>
-                    </table>
-                </div>
-            </div>
+            </BrowserRouter>
         );
 
     }
