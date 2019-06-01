@@ -40,64 +40,65 @@ class AddProduct extends React.Component {
     }
 
     render() {
-        return (
-            <div className="container">
+        return (<>
+                <h1>Dodaj produkty do swojej lodówki:</h1>
+                <div className="container text-center component">
+                    <form>
+                        <div className="row">
+                            <div className="col-lg-7 ">
+                                <select type="text" id="name" className="form-control">
+                                    <option disabled selected>Wybierz produkt</option>
+                                    {
+                                        this.state.products.map(product => (
+                                            <option value={product.name}
+                                                    key={product.id}>{product.name}, {product.type}</option>
+                                        ))
+                                    }
+                                </select>
+                            </div>
+                            <div className="col-lg-3">
+                                <input id="quantity" placeholder="ilość" className="form-control"/>
+                            </div>
+                            <div className="col-lg-2">
+                                <button type="button" className="btn btn-outline-success" onClick={event => {
+                                    event.preventDefault();
+                                    const name = document.getElementById("name").value;
+                                    const quantity = document.getElementById('quantity').value;
+                                    if (name === 'Wybierz produkt') return;
+                                    const indexInState = this.state.products.findIndex(item => item.name.toLowerCase() === name.toLowerCase());
+                                    const id = this.state.products[indexInState].id;
+                                    const type = this.state.products[indexInState].type;
+                                    if (/^\d+$/.test(quantity) === false || quantity === 0) {
+                                        alert('wybierz ilość');
+                                        return;
+                                    }
+                                    const indexOfProduct = this.state.fridge.findIndex(item => item.name.toLowerCase() === name.toLowerCase());
+                                    if (indexOfProduct === -1) {
+                                        this.state.fridge.push({
+                                            id: id,
+                                            name: name,
+                                            quantity: Number.parseInt(quantity),
+                                            type: type
+                                        });
+                                        this.forceUpdate();
+                                        this.database.update(this.state.fridge)
+                                    } else {
+                                        // eslint-disable-next-line
+                                        this.state.fridge[indexOfProduct].quantity += Number.parseInt(quantity);
+                                        this.forceUpdate();
+                                        this.database.update(this.state.fridge);
+                                    }
+                                    document.getElementById('quantity').value = "";
+                                }
+                                }
+                                >Dodaj produkt
+                                </button>
+                            </div>
+                        </div>
+                    </form>
 
-                <form>
-                    <div className="row">
-                        <div className="col-lg-6">
-                            <select type="text" id="name" className="form-control">
-                                <option disabled selected>Wybierz produkt</option>
-                                {
-                                    this.state.products.map(product => (
-                                        <option value={product.name}
-                                                key={product.id}>{product.name}, {product.type}</option>
-                                    ))
-                                }
-                            </select>
-                        </div>
-                        <div className="col-lg-2">
-                            <input id="quantity" placeholder="ilość" className="form-control"/>
-                        </div>
-                        <div className="col-sm-2">
-                            <button type="button" className="btn btn-outline-success" onClick={event => {
-                                event.preventDefault();
-                                const name = document.getElementById("name").value;
-                                const quantity = document.getElementById('quantity').value;
-                                if (name === 'Wybierz produkt') return;
-                                const indexInState = this.state.products.findIndex(item => item.name.toLowerCase() === name.toLowerCase());
-                                const id = this.state.products[indexInState].id;
-                                const type = this.state.products[indexInState].type;
-                                if (/^\d+$/.test(quantity) === false || quantity === 0) {
-                                    alert('wybierz ilość');
-                                    return;
-                                }
-                                const indexOfProduct = this.state.fridge.findIndex(item => item.name.toLowerCase() === name.toLowerCase());
-                                if (indexOfProduct === -1) {
-                                    this.state.fridge.push({
-                                        id: id,
-                                        name: name,
-                                        quantity: Number.parseInt(quantity),
-                                        type: type
-                                    });
-                                    this.forceUpdate();
-                                    this.database.update(this.state.fridge)
-                                } else {
-                                    // eslint-disable-next-line
-                                    this.state.fridge[indexOfProduct].quantity += Number.parseInt(quantity);
-                                    this.forceUpdate();
-                                    this.database.update(this.state.fridge);
-                                }
-                                document.getElementById('quantity').value = "";
-                            }
-                            }
-                            >Dodaj produkt
-                            </button>
-                        </div>
-                    </div>
-                </form>
-
-            </div>
+                </div>
+            </>
         )
 
     }

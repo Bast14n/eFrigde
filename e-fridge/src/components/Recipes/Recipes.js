@@ -1,7 +1,9 @@
 import React from "react";
 import axios from 'axios';
 import {Link, BrowserRouter, Route} from 'react-router-dom';
-import RecipesDetail from './Detail/RecipesDetail';
+import './Recipes.css'
+import {Switch} from "react-router";
+import ButtonGroup from "react-bootstrap/es/ButtonGroup";
 
 class Recipes extends React.Component {
     state = {
@@ -44,46 +46,56 @@ class Recipes extends React.Component {
         const labels = {
             name: 'Name: ',
             detailsButton: 'Pokaż przepis',
-            searchRestaurantsButton: 'Wyszukaj restauracje'
+            searchRestaurantsButton: 'Wyszukaj'
         };
 
         const recipesTableRows = this.state.recipes.map((recipe, key) =>
             <tr key={key}>
                 <td>{recipe.name}</td>
                 <td>
-                    <Link style={{textDecoration: 'none', color: 'white'}} to={`/RecipeDetails/${recipe.id}`} id={recipe.id}>
-                        <button style={{textDecoration: 'none', color: 'white'}} className="btn btn-outline-success">{labels.detailsButton}</button>
-                    </Link>
-                    <Route path={`/RecipeDetails/:id`}
-                           render={(props) => (
-                               <RecipesDetail {...props} id={recipe.id}/>)}
-                    />
+                    <a style={{textDecoration: 'none', color: 'white'}} href={`/RecipeDetails/${recipe.id}`}
+                       id={recipe.id}>
+                        <button style={{textDecoration: 'none', color: 'white'}}
+                                className="btn btn-outline-success">{labels.detailsButton}</button>
+                    </a>
                 </td>
             </tr>
         );
 
         return (
             <div className="container">
+
+                <h1>Wyszukaj przepisy:</h1>
                 <BrowserRouter>
-                    <div className="container">
-                        <div className="row">
-                            <div className="col-lg-6">
-                                <input className="form-control" value={this.state.nameSearchParam}
-                                       onChange={this.handleChangeSearchParam}/>
+                    <Switch>
+                        <div className="container">
+                            <div className="row">
+
                             </div>
-                            <div className="col-lg-3">
-                                <button style={{textDecoration: 'none', color: 'white'}} className="btn btn-outline-success"
-                                        onClick={this.handleClick}>{labels.searchRestaurantsButton}</button>
+                            <div className="row">
+                                <table className="table table-bordered table-dark">
+                                    <thead className="table-active">
+                                    <td>
+                                        <input className="form-control" value={this.state.nameSearchParam}
+                                               onChange={this.handleChangeSearchParam}/>
+                                    </td>
+                                    <td><ButtonGroup>
+                                        <button style={{textDecoration: 'none', color: 'white'}}
+                                                className="btn btn-outline-success"
+                                                onClick={this.handleClick}>{labels.searchRestaurantsButton}</button>
+                                        <button style={{textDecoration: 'none', color: 'white'}}
+                                                className="btn btn-outline-success"
+                                                onClick={()=>alert("TODO: implements")}>Pokaż dostępne</button>
+                                    </ButtonGroup>
+                                    </td>
+                                    </thead>
+                                    <tbody>
+                                    {recipesTableRows}
+                                    </tbody>
+                                </table>
                             </div>
                         </div>
-                        <div className="row">
-                            <table className="table">
-                                <tbody>
-                                {recipesTableRows}
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
+                    </Switch>
                 </BrowserRouter>
             </div>
         );
