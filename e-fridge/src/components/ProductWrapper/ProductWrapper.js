@@ -17,7 +17,7 @@ class ProductWrapper extends React.Component {
     }
 
     getDataFromDatabase() {
-        // if (this.state.userId === null) window.location.reload();
+        if (this.state.userId === null) window.location.reload();
         this.database.on('value', (snapshot) => {
             let products = snapshot.val();
             let downloadedFridge = [];
