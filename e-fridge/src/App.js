@@ -9,6 +9,7 @@ import Home from './Home';
 import firebase from "firebase";
 import StyledFirebaseAuth from "react-firebaseui/StyledFirebaseAuth"
 import Add from "./AddProduct";
+import Search from "./components/Recipes/Recipes";
 
 if (!firebase.apps.length) {
     firebase.initializeApp({
@@ -46,20 +47,22 @@ class App extends Component {
     }
 
     render() {
-        return (
-            <div className="area App">
+        return (<div className="App">
+                <div className="area">
                     <ul className="circles">
-                        <li></li>
-                        <li></li>
-                        <li></li>
-                        <li></li>
-                        <li></li>
-                        <li></li>
-                        <li></li>
-                        <li></li>
-                        <li></li>
-                        <li></li>
+                        <li/>
+                        <li/>
+                        <li/>
+                        <li/>
+                        <li/>
+                        <li/>
+                        <li/>
+                        <li/>
+                        <li/>
+                        <li/>
                     </ul>
+                </div>
+            <div className="context">
                     {this.state.isSignedIn ? (
                         <BrowserRouter>
                             <Switch>
@@ -78,7 +81,7 @@ class App extends Component {
                                     <Link style={{textDecoration: 'none', color: 'white'}} to="/add-product">Dodaj produkt do lodówki</Link>
                                         </button>
                                         <button type="button" className="btn btn-outline-info">
-                                    <Link style={{textDecoration: 'none', color: 'white'}} to="/search">Wyszukaj dostępny przepis</Link>
+                                    <Link style={{textDecoration: 'none', color: 'white'}} to="/RecipeDetails">Wyszukaj dostępny przepis</Link>
                                         </button>
                                     <button type="button" className="btn btn-outline-warning" onClick={() => {
                                         firebase.auth().signOut();
@@ -91,10 +94,12 @@ class App extends Component {
                                 <div className="btn-group" role="group" aria-label="Basic example">
 
                                 </div>
-                            <h1>Witaj {firebase.auth().currentUser.displayName}</h1>
+                            <h1>Witaj {firebase.auth().currentUser.displayName}!</h1>
                                 <Route exact path="/profile" component={Home}/>
-                                <Route path="/your-fridge" component={Home}/>
-                                <Route path="/add-product" component={Add}/>
+                                <Route exact path="/your-fridge" component={Home}/>
+                                <Route exact path="/add-product" component={Add}/>
+                                <Route path="/RecipeDetails" component={Search}/>
+
                             </span>
                             </Switch>
                         </BrowserRouter>
@@ -107,7 +112,8 @@ class App extends Component {
                             {/*<button onClick={this.Login}>Register</button>*/}
                         </div>
                     )}
-                </div>
+            </div>
+            </div>
         )
     }
 }
