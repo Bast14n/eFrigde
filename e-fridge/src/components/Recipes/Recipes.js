@@ -4,21 +4,21 @@ import {Link, BrowserRouter, Route} from 'react-router-dom';
 import RecipesDetail from './Detail/RecipesDetail';
 
 class Recipes extends React.Component {
+    state = {
+        recipes: [
+            {
+                id: 0,
+                name: ''
+            }
+        ],
+        nameSearchParam: ''
+    };
+
     constructor(props) {
         super(props);
 
         this.handleChangeSearchParam = this.handleChangeSearchParam.bind(this);
         this.handleClick = this.handleClick.bind(this)
-
-        this.state = {
-            recipes: [
-                {
-                    id: 0,
-                    name: ''
-                }
-            ],
-            nameSearchParam: ''
-        };
 
 
         axios.get('http://localhost:8080/recipes/all')
@@ -29,6 +29,7 @@ class Recipes extends React.Component {
     }
 
     handleClick() {
+        console.log("wyszukuje restauracje")
         if (this.state.nameSearchParam === '') {
             alert('Nie podano parametru wyszukiwania');
         } else {
@@ -50,31 +51,41 @@ class Recipes extends React.Component {
             <tr key={key}>
                 <td>{recipe.name}</td>
                 <td>
-                    <Link to={`/RecipeDetails/${recipe.id}`} id={recipe.id}>
-                        <button>{labels.detailsButton}</button>
+                    <Link style={{textDecoration: 'none', color: 'white'}} to={`/RecipeDetails/${recipe.id}`} id={recipe.id}>
+                        <button style={{textDecoration: 'none', color: 'white'}} className="btn btn-outline-success">{labels.detailsButton}</button>
                     </Link>
                     <Route path={`/RecipeDetails/:id`}
-                           render={(props) => (<RecipesDetail {...props} id={recipe.id}/>)}/>
+                           render={(props) => (
+                               <RecipesDetail {...props} id={recipe.id}/>)}
+                    />
                 </td>
             </tr>
         );
 
         return (
-            <BrowserRouter>
-                <div className="container">
-                    <div className="row">
-                        <input value={this.state.nameSearchParam} onChange={this.handleChangeSearchParam}/>
-                        <button>{labels.searchRestaurantsButton}</button>
+            <div className="container">
+                <BrowserRouter>
+                    <div className="container">
+                        <div className="row">
+                            <div className="col-lg-6">
+                                <input className="form-control" value={this.state.nameSearchParam}
+                                       onChange={this.handleChangeSearchParam}/>
+                            </div>
+                            <div className="col-lg-3">
+                                <button style={{textDecoration: 'none', color: 'white'}} className="btn btn-outline-success"
+                                        onClick={this.handleClick}>{labels.searchRestaurantsButton}</button>
+                            </div>
+                        </div>
+                        <div className="row">
+                            <table className="table">
+                                <tbody>
+                                {recipesTableRows}
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
-                    <div className="row">
-                        <table className="table">
-                            <tbody>
-                            {recipesTableRows}
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </BrowserRouter>
+                </BrowserRouter>
+            </div>
         );
 
     }
