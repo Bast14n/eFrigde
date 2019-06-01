@@ -3,10 +3,10 @@ import axios from 'axios';
 import Ingredients from './Ingredients';
 import './RecipesDetail.css' ;
 
-class RecipesDetail extends React.Component{
+class RecipesDetail extends React.Component {
     constructor(props) {
         super(props);
-            this.state = {
+        this.state = {
             recipeId: props.id,
             recipe: {
                 name: "",
@@ -16,7 +16,7 @@ class RecipesDetail extends React.Component{
             }
         };
 
-        axios.get('http://localhost:8080/recipes/'+this.state.recipeId)
+        axios.get('http://localhost:8080/recipes/' + this.state.recipeId)
             .then(response => {
                 this.setState({recipe: response.data})
             });
@@ -24,11 +24,10 @@ class RecipesDetail extends React.Component{
     }
 
 
-
-    render(){
-        return(
+    render() {
+        return (
             <div>
-            <h1>{this.state.recipe.name}</h1>
+                <h1>{this.state.recipe.name}</h1>
                 <p>{this.state.recipe.description}</p>
                 <ul>
                     {
@@ -37,6 +36,8 @@ class RecipesDetail extends React.Component{
                         ))
                     }
                 </ul>
+                <button onClick={() => alert("TODO: implement")}>Wykorzystaj przepis</button>
+                <button onClick={() => alert("TODO: implement")}>Wygeneruj listę zakupową</button>
             </div>
         )
     }
