@@ -4,13 +4,13 @@ import Product from './components/ProductWrapper/ProductItem/ProductItem.js';
 import {BrowserRouter, Route, Switch, Link} from 'react-router-dom'
 
 
+
 // import fire from './config/Fire';
 import Home from './Home';
 // import Login from './Login';
-import ProductWrapper from "./components/ProductWrapper/ProductWrapper.js";
 import firebase from "firebase";
 import StyledFirebaseAuth from "react-firebaseui/StyledFirebaseAuth"
-import ProductItem from "./components/ProductWrapper/ProductItem/ProductItem";
+import Add from "./AddProduct";
 
 if (!firebase.apps.length) {
     firebase.initializeApp({
@@ -54,30 +54,30 @@ class App extends Component {
                 {this.state.isSignedIn ? (
                     <BrowserRouter>
                         <Switch>
-                        <span>
-            {/*<div>Signed In!</div>*/}
+                            <span>
 
-                            <div>
-                            <Link to="/profile"><button className="btn btn-danger">Twój profil</button></Link>
-                            <Link to="/your-fridge"><button
-                                className="btn btn-danger">Podgląd Twojej lodówki</button></Link>
-                            <Link to="/add-product"><button className="btn btn-danger">Dodaj produkt do lodówki</button></Link>
-                            <Link to="/search"><button className="btn btn-danger">Wyszukaj dostępny przepis</button></Link>
-                            <button className="btn btn-warning" onClick={() => {
-                                firebase.auth().signOut();
-                                localStorage.removeItem('user');
-                            }}>Wyloguj!</button>
-                        </div>
-                        <h1>Witaj {firebase.auth().currentUser.displayName}</h1>
+                                <div>
+                                <Link to="/profile"><button className="btn btn-danger">Twój profil</button></Link>
+                                <Link to="/your-fridge"><button
+                                    className="btn btn-danger">Podgląd Twojej lodówki</button></Link>
+                                <Link to="/add-product"><button
+                                    className="btn btn-danger">Dodaj produkt do lodówki</button></Link>
+                                <Link to="/search"><button
+                                    className="btn btn-danger">Wyszukaj dostępny przepis</button></Link>
+                                <button className="btn btn-warning" onClick={() => {
+                                    firebase.auth().signOut();
+                                    localStorage.removeItem('user');
+                                }}>Wyloguj!</button>
+                            </div>
+                            <h1>Witaj {firebase.auth().currentUser.displayName}</h1>
 
-                            <Route exact path="/profile" component={Home}/>
-                            <Route path="/your-fridge" component={Home}/>
-                            <Route path="/add-produkt" component={Product}/>
-
-
-                            {/*<Home/>*/}
-                        </span></Switch>
+                                <Route exact path="/profile" component={Home}/>
+                                <Route path="/your-fridge" component={Home}/>
+                                <Route path="/add-product" component={Add}/>
+                            </span>
+                        </Switch>
                     </BrowserRouter>
+
                 ) : (
                     <div>
                         <StyledFirebaseAuth
@@ -92,49 +92,4 @@ class App extends Component {
     }
 }
 
-export default App
-
-// class App extends Component {
-//   constructor() {
-//     super();
-//     this.state = ({
-//       user: null,
-//     });
-//     this.authListener = this.authListener.bind(this);
-//   }
-
-//   componentDidMount() {
-//     this.authListener();
-//   }
-
-//   authListener() {
-//     fire.auth().onAuthStateChanged((user) => {
-//       console.log(user);
-//       if (user) {
-//         this.setState({ user });
-//         localStorage.setItem('user', user.uid);
-//       } else {
-//         this.setState({ user: null });
-//         localStorage.removeItem('user');
-//       }
-//     });
-//   }
-
-//   render() {
-//     return (
-//       <div className="App">
-//         {this.state.user ? (
-//           <>
-//           <Home />
-//           <ProductWrapper/>
-//             </>
-//         ) :
-//           (
-//             <Login />
-//           )}
-//       </div>
-//     );
-//   }
-// }
-
-// export default App;
+export default App;
