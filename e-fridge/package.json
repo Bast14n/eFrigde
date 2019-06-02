@@ -2,7 +2,7 @@
   "name": "e-fridge",
   "version": "0.1.0",
   "private": true,
-  "homepage" : "https://bast14n.github.io/eFrigde",
+  "homepage": "https://bast14n.github.io/eFrigde",
   "dependencies": {
     "axios": "^0.18.1",
     "bootstrap": "^4.3.1",
