@@ -85,17 +85,8 @@ class RecipesDetail extends React.Component {
                                 break;
                             }
                             else {
-                                const sub = this.state.fridge[fridgeIngredientIndex].quantity - recipeIngredient.quantity;
-                                if (sub === 0) {
-                                    this.state.fridge.splice(fridgeIngredientIndex, 1);
-                                    alert(this.state.fridge.length)
-                                    // alert('wykorzystano cały składnik');
-
-                                }
-                                else {
-                                    this.state.fridge[fridgeIngredientIndex].quantity -= recipeIngredient.quantity;
-                                    alert('wykorzystano przepis');
-                                }
+                                this.state.fridge[fridgeIngredientIndex].quantity -= recipeIngredient.quantity;
+                                alert('wykorzystano przepis');
                             }
                         }
                         this.forceUpdate();
