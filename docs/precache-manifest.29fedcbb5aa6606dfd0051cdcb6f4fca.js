@@ -1,6 +1,6 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "d7ff9ef8794e8f36328a3c7db97761f0",
+    "revision": "e1c2d972ea5e8c54695dc22ff31edc89",
     "url": "/eFrigde/index.html"
   },
   {
@@ -8,7 +8,7 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/eFrigde/static/css/2.22a7d4ef.chunk.css"
   },
   {
-    "revision": "dc2dde341faf78632376",
+    "revision": "1356c831cba008fae97d",
     "url": "/eFrigde/static/css/main.95832410.chunk.css"
   },
   {
@@ -16,8 +16,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/eFrigde/static/js/2.6ae5e948.chunk.js"
   },
   {
-    "revision": "dc2dde341faf78632376",
-    "url": "/eFrigde/static/js/main.267895d5.chunk.js"
+    "revision": "1356c831cba008fae97d",
+    "url": "/eFrigde/static/js/main.9c03ce40.chunk.js"
   },
   {
     "revision": "0d36ddc317e0021c6027",
