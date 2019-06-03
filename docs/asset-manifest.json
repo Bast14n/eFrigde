@@ -1,17 +1,17 @@
 {
   "files": {
-    "main.css": "/eFrigde/static/css/main.a9e8210b.chunk.css",
-    "main.js": "/eFrigde/static/js/main.00bc68ab.chunk.js",
-    "main.js.map": "/eFrigde/static/js/main.00bc68ab.chunk.js.map",
+    "main.css": "/eFrigde/static/css/main.95832410.chunk.css",
+    "main.js": "/eFrigde/static/js/main.267895d5.chunk.js",
+    "main.js.map": "/eFrigde/static/js/main.267895d5.chunk.js.map",
     "runtime~main.js": "/eFrigde/static/js/runtime~main.65e9ec89.js",
     "runtime~main.js.map": "/eFrigde/static/js/runtime~main.65e9ec89.js.map",
     "static/css/2.22a7d4ef.chunk.css": "/eFrigde/static/css/2.22a7d4ef.chunk.css",
-    "static/js/2.f85c4ce1.chunk.js": "/eFrigde/static/js/2.f85c4ce1.chunk.js",
-    "static/js/2.f85c4ce1.chunk.js.map": "/eFrigde/static/js/2.f85c4ce1.chunk.js.map",
+    "static/js/2.6ae5e948.chunk.js": "/eFrigde/static/js/2.6ae5e948.chunk.js",
+    "static/js/2.6ae5e948.chunk.js.map": "/eFrigde/static/js/2.6ae5e948.chunk.js.map",
     "index.html": "/eFrigde/index.html",
-    "precache-manifest.8b2e4d19b258df6220a42d60fcba7b77.js": "/eFrigde/precache-manifest.8b2e4d19b258df6220a42d60fcba7b77.js",
+    "precache-manifest.fb9ce6554caa54e4f8d5492e92306067.js": "/eFrigde/precache-manifest.fb9ce6554caa54e4f8d5492e92306067.js",
     "service-worker.js": "/eFrigde/service-worker.js",
     "static/css/2.22a7d4ef.chunk.css.map": "/eFrigde/static/css/2.22a7d4ef.chunk.css.map",
-    "static/css/main.a9e8210b.chunk.css.map": "/eFrigde/static/css/main.a9e8210b.chunk.css.map"
+    "static/css/main.95832410.chunk.css.map": "/eFrigde/static/css/main.95832410.chunk.css.map"
   }
 }

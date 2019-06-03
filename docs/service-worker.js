@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 importScripts(
-  "/eFrigde/precache-manifest.8b2e4d19b258df6220a42d60fcba7b77.js"
+  "/eFrigde/precache-manifest.fb9ce6554caa54e4f8d5492e92306067.js"
 );
 
 self.addEventListener('message', (event) => {
